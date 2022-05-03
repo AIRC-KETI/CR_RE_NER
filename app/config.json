@@ -1,0 +1,15 @@
+{
+    "relation_extraction": {
+        "hf_path": "../output/KETI-AIR_ke-t5-base_klue_re",
+        "model_name": "T5EncoderForSequenceClassificationFirstSubmeanObjmean"
+    },
+    "named_entity_recognition": {
+        "hf_path": "../output/KETI-AIR_ke-t5-base_klue_ner",
+        "model_name": "T5EncoderForEntityRecognitionWithCRF"
+    },
+    "coreference_resolution": {
+        "hf_path": "../output/KETI-AIR_ke-t5-base_nikl_cr",
+        "model_name": "T5EncoderForEntityRecognitionWithCRF"
+    },
+    "pre_trained_tokenizer": "KETI-AIR/ke-t5-base"
+}
