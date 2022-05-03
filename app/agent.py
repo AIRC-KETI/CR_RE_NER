@@ -9,7 +9,7 @@ import torch
 from transformers import AutoTokenizer
 
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from utils.meta import _KLUE_RE_RELATIONS, _KLUE_NER_IOB2_TAGS, _DEFAULT_SPAN_TAGS
+from meta import _KLUE_RE_RELATIONS, _KLUE_NER_IOB2_TAGS, _DEFAULT_SPAN_TAGS
 from models.models import *
 from models.models import load_model
 
