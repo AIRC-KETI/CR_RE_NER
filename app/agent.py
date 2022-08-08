@@ -12,6 +12,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from meta import _KLUE_RE_RELATIONS, _KLUE_NER_IOB2_TAGS, _DEFAULT_SPAN_TAGS
 from models.models import *
 from models.models import load_model
+from utils.download import download_file_from_google_drive
 
 class Service:
     task = [
@@ -45,9 +46,11 @@ class Service:
                 }
             ), 400
 
+OUTPUT_GOOGLE_DRIVE_ID = "1okVoGlrmvqO3Ii12Q3wXVTbOE9w36H7E"
+
 class MainService(object):
     def __init__(self):
-        self.config = json.load(open("config.json", "r"))
+        self.config = json.load(open("app/config.json", "r"))
 
         self.service_manager = {
             "relation_extraction": {
@@ -69,6 +72,8 @@ class MainService(object):
     @staticmethod
     def load_service_manager(model_cfg):
         model_class = load_model(model_cfg["model_name"])
+        if not os.path.isdir(model_cfg["hf_path"]):
+            download_file_from_google_drive(OUTPUT_GOOGLE_DRIVE_ID, "./output.tar")
         model = model_class.from_pretrained(model_cfg["hf_path"])
         model.eval()
 
@@ -218,7 +223,7 @@ class MainService(object):
 
         inputs = x[input_key]
         ret[f'{input_key}_pretokenized'] = inputs
-        input_hf = tokenizer(inputs)
+        input_hf = tokenizer(inputs, return_tensors='pt')
         input_ids = input_hf.input_ids
 
         subject_entity = x['subject_entity']
@@ -246,9 +251,14 @@ class MainService(object):
         object_start = object_tk_idx[0]
         object_end = object_tk_idx[-1]
 
-        entity_token_idx = np.array([[subject_start, subject_end], [object_start, object_end]])
-        ret['entity_token_idx'] = np.expand_dims(entity_token_idx, axis=0)
-        ret['inputs'] = tokenizer(inputs, return_tensors='pt').input_ids
+        subject_token_idx = torch.zeros_like(input_ids)
+        object_token_idx = torch.zeros_like(input_ids)
+        subject_token_idx[0, subject_start:subject_end] = 1
+        object_token_idx[0, object_start:object_end] = 1
+
+        ret['subject_token_idx'] = subject_token_idx
+        ret['object_token_idx'] = object_token_idx
+        ret['inputs'] = input_ids
         return ret
 
     def get_doc_pos(self, doc_text, inputs, pos, offset, tag_len=None):
@@ -309,7 +319,9 @@ class MainService(object):
         for doc in doc_dict:
             preproc_doc = self.re_preproc_for_classification_with_idx(doc)
             inputs = self.tokenize_re_with_tk_idx(preproc_doc, self.tokenizer)
-            outputs = self.service_manager[task]['model'](input_ids=inputs['inputs'], entity_token_idx=inputs['entity_token_idx'])
+            outputs = self.service_manager[task]['model'](input_ids=inputs['inputs'],
+                                                          subject_token_idx=inputs['subject_token_idx'],
+                                                          object_token_idx=inputs['object_token_idx'])
             label = torch.argmax(outputs['logits'], 1).numpy()[0]
             result.append({
                 "subject": preproc_doc['subject_entity']['word'],

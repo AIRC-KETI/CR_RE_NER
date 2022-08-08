@@ -1,4 +1,3 @@
-import json
 import logging
 
 from flask import Flask, request
@@ -23,3 +22,6 @@ def task_list():
 def do_task():
     content = request.json
     return api_service.do(content)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

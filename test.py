@@ -3,7 +3,7 @@ import requests
 from urllib.parse import urljoin
 
 #URL = 'http://ketiair.com:10022/'
-URL = 'http://ketiair.com:10022/'
+URL = 'http://10.1.17.17:5000/'
 
 # test task_list
 task_list_q = '/api/task_list'
@@ -55,6 +55,18 @@ example_cr = json.dumps(
 headers = {'Content-Type': 'application/json; charset=utf-8'} # optional
 
 response = requests.post(urljoin(URL, task_q), data=example_re, headers=headers)
+print(response.status_code)
+print(response.request)
+print(response.json())
+print(response.raise_for_status())
+
+response = requests.post(urljoin(URL, task_q), data=example_ner, headers=headers)
+print(response.status_code)
+print(response.request)
+print(response.json())
+print(response.raise_for_status())
+
+response = requests.post(urljoin(URL, task_q), data=example_cr, headers=headers)
 print(response.status_code)
 print(response.request)
 print(response.json())
