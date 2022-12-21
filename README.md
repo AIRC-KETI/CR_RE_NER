@@ -92,7 +92,7 @@ Text: 삼성전자는 KDDI, NTT 도코모 등 통신사를 통해 어제(21일) 
 {"result":
     [{
         "subject": "삼성전자",
-        'relation': 'org:product',
+        "relation": "org:product",
         'object': '갤럭시S22'
     }]
 }
