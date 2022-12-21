@@ -36,7 +36,7 @@ python app/app.py
 ```
 
 ## Evaluation
-
+ 
 ### 정량적 평가
 
 | task | base model | f1 score  |
