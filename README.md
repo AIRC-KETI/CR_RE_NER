@@ -81,7 +81,7 @@ Text: 지난달 31일 서울 광진구에서 현빈과 손예진이 결혼시을
     [{
         "subject": "현빈",
         "relation": "per:spouse",
-        'object': '손예진'
+        "object": "손예진"
     }]
 }
 ```
