@@ -11,7 +11,7 @@ KLUE NER Dataset: Huggingface dataloader 활용
 3. Coreference Resolution \
 NIKL CR Dataset: NIKL Dataset Download
 
-## Training
+## Training 
 
 KLUE RE Dataset은 CRE 학습 시에 자동으로 데이터를 다운로드 합니다. \
 기본적으로 ke-t5-base모델을 활용했으며, 학습 시에 check point와 hf 모델 저장을 같이 합니다.
