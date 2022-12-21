@@ -26,7 +26,7 @@ python -m torch.distributed.run --nproc_per_node=2 train.py \
 
 task = ['klue_re', 'klue_ner', 'nikl_cr']
 
-## Test
+## Test 
 
 app/app.py를 활용하여 flask를 통해 각 task별로 test를 실행할 수 있습니다. \
 학습한 모델이 없는 경우, 사전에 학습한 모델을 자동으로 다운받아 실행합니다. (각각 ke-t5-base모델, 30epoch 학습) \
