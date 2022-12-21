@@ -53,11 +53,11 @@ Relation Extraction
 Text: 제2총군은 태평양 전쟁 말기에 일본 본토에 상륙하려는 연합군에게 대항하기 위해 설립된 일본 제국 육군의 총군이었다.
 
 ```json
-{'result':
+{"result":
     [{
-        'subject': '제2총군',
-        'relation': 'org:member_of',
-        'object': '일본 제국 육군'
+        "subject": "제2총군",
+        "relation": "org:member_of",
+        "object": "일본 제국 육군"
     }]
 }
 ```
