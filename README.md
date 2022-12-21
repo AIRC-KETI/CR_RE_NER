@@ -77,9 +77,9 @@ Text: 안중근은 이토 히로부미를 암살하여 러시아 헌병에게 �
 Text: 지난달 31일 서울 광진구에서 현빈과 손예진이 결혼시을 올렸으며 현재 허니문 여행을 즐기고 있다.
 
 ```json
-{'result':
+{"result":
     [{
-        'subject': '현빈',
+        "subject": "현빈",
         'relation': 'per:spouse',
         'object': '손예진'
     }]
