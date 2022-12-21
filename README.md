@@ -2,7 +2,7 @@
 
 KE-T5모델을 활용하여 Relation Extraction, Named Entity Recognition, Coreference Resolution 학습 및 테스트
 
-## Dataset
+## Dataset 
 
 1. Relation Extraction \
 KLUE RE Dataset: Huggingface dataloader 활용
