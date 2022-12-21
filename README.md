@@ -68,7 +68,7 @@ Text: 안중근은 이토 히로부미를 암살하여 러시아 헌병에게 �
 {"result":
     [{
         "subject": "안중근",
-        'relation': 'per:date_of_death',
+        "relation": 'per:date_of_death',
         'object': '1910년 3월 26일 오전 10시'
     }]
 }
